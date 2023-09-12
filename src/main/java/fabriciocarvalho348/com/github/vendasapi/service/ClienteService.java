@@ -11,37 +11,46 @@ import java.util.List;
 
 @Service
 public class ClienteService {
+    private static final String CLIENTE_NAO_ENCONTRADO = "Cliente não encontrado";
 
     @Autowired
     private ClienteRepository clienteRepository;
 
     public Cliente pesquisarPorId(Long id) {
-        Cliente encontrado = clienteRepository.findById(id)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
-
-        return encontrado;
+        return clienteRepository.findById(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CLIENTE_NAO_ENCONTRADO));
     }
 
     public List<Cliente> pesquisarTodos() {
-        List<Cliente> lista = clienteRepository.findAll();
-        return lista;
+        return clienteRepository.findAll();
     }
 
     public Cliente incluir(Cliente cliente) {
-        Cliente salvo = clienteRepository.save(cliente);
-        return salvo;
+        return clienteRepository.save(cliente);
     }
 
     public Cliente atualizar(Cliente cliente, Long id) {
-        Cliente encontrado = pesquisarPorId(id);
-        cliente.setId(encontrado.getId());
-        Cliente salvo = clienteRepository.save(cliente);
-        return salvo;
+//        Cliente encontrado = pesquisarPorId(id);
+//        cliente.setId(encontrado.getId());
+//        return clienteRepository.save(cliente);
+
+        // API STREAM JAVA
+        return clienteRepository.findById(id)
+                .map(m -> {
+                    cliente.setId(m.getId());
+                    return clienteRepository.save(cliente);
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CLIENTE_NAO_ENCONTRADO));
     }
 
     public void excluir(Long id) {
-        Cliente encontrado = pesquisarPorId(id);
-
-        clienteRepository.delete(encontrado);
+//        Cliente encontrado = pesquisarPorId(id);
+//        clienteRepository.delete(encontrado);
+        clienteRepository.findById(id)
+                .map(m -> {
+                    clienteRepository.delete(m);
+                    return Void.TYPE;
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CLIENTE_NAO_ENCONTRADO));
     }
 }
