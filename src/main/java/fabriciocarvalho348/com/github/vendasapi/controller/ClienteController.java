@@ -16,26 +16,22 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     public Cliente listarPorId(@PathVariable Long id) {
-        Cliente response = clienteService.pesquisarPorId(id);
-        return response;
+        return clienteService.pesquisarPorId(id);
     }
 
     @GetMapping
     public List<Cliente> pesquisarTodos() {
-        List<Cliente> response = clienteService.pesquisarTodos();
-        return response;
+        return clienteService.pesquisarTodos();
     }
 
     @PostMapping
     public Cliente incluir(@RequestBody Cliente cliente) {
-        Cliente response = clienteService.incluir(cliente);
-        return response;
+        return clienteService.incluir(cliente);
     }
 
     @PutMapping("/{id}")
     public Cliente atualizar(@RequestBody Cliente cliente, @PathVariable Long id) {
-        Cliente response = clienteService.atualizar(cliente, id);
-        return response;
+        return clienteService.atualizar(cliente, id);
     }
 
     @DeleteMapping("/{id}")
