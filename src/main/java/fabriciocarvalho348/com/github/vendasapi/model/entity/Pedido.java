@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "PEDIDOS")
 public class Pedido {
+
     @Id
     @Getter
     @Setter
