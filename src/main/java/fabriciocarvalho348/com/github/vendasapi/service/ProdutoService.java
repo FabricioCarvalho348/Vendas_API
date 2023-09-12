@@ -31,11 +31,6 @@ public class ProdutoService {
     }
 
     public Produto atualizar(Produto produto, Long id) {
-//        Cliente encontrado = pesquisarPorId(id);
-//        cliente.setId(encontrado.getId());
-//        return clienteRepository.save(cliente);
-
-        // API STREAM JAVA
         return produtoRepository.findById(id)
                 .map(m -> {
                     produto.setId(m.getId());
@@ -45,8 +40,6 @@ public class ProdutoService {
     }
 
     public void excluir(Long id) {
-//        Cliente encontrado = pesquisarPorId(id);
-//        clienteRepository.delete(encontrado);
         produtoRepository.findById(id)
                 .map(m -> {
                     produtoRepository.delete(m);
