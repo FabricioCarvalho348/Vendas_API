@@ -1,11 +1,10 @@
 package fabriciocarvalho348.com.github.vendasapi.service;
 
+import fabriciocarvalho348.com.github.vendasapi.exception.ResourceNotFoundException;
 import fabriciocarvalho348.com.github.vendasapi.model.entity.Produto;
 import fabriciocarvalho348.com.github.vendasapi.model.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class ProdutoService {
 
     public Produto pesquisarPorId(Long id) {
         return produtoRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PRODUTO_NAO_ENCONTRADO));
+                .orElseThrow(() -> new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO));
     }
 
     public List<Produto> pesquisarTodos() {
@@ -36,7 +35,7 @@ public class ProdutoService {
                     produto.setId(m.getId());
                     return produtoRepository.save(produto);
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PRODUTO_NAO_ENCONTRADO));
+                .orElseThrow(() -> new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO));
     }
 
     public void excluir(Long id) {
@@ -45,6 +44,6 @@ public class ProdutoService {
                     produtoRepository.delete(m);
                     return Void.TYPE;
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PRODUTO_NAO_ENCONTRADO));
+                .orElseThrow(() -> new ResourceNotFoundException(PRODUTO_NAO_ENCONTRADO));
     }
 }
