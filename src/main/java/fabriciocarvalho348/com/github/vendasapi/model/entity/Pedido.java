@@ -1,5 +1,6 @@
 package fabriciocarvalho348.com.github.vendasapi.model.entity;
 
+import fabriciocarvalho348.com.github.vendasapi.model.enums.StatusPedido;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,8 +34,12 @@ public class Pedido {
     private LocalDate dataPedido;
 
     @Getter
-    @Column(name = "total")
+    @Column(name = "total", precision = 10, scale = 2)
     private BigDecimal total;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 
     @Getter
     @OneToMany(mappedBy = "pedido")
