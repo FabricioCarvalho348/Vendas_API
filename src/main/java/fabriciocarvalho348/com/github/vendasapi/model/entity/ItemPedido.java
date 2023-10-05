@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "ITEM_PEDIDO")
 public class ItemPedido {
+
     @Id
     @Getter
     @Setter

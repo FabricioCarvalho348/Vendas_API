@@ -1,5 +1,6 @@
 package fabriciocarvalho348.com.github.vendasapi.service;
 
+import fabriciocarvalho348.com.github.vendasapi.exception.ResourceNotFoundException;
 import fabriciocarvalho348.com.github.vendasapi.model.entity.Cliente;
 import fabriciocarvalho348.com.github.vendasapi.model.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ClienteService {
 
     public Cliente pesquisarPorId(Long id) {
         return clienteRepository.findById(id)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CLIENTE_NAO_ENCONTRADO));
+        .orElseThrow(() -> new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO));
     }
 
     public List<Cliente> pesquisarTodos() {
@@ -40,7 +41,7 @@ public class ClienteService {
                     cliente.setId(m.getId());
                     return clienteRepository.save(cliente);
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CLIENTE_NAO_ENCONTRADO));
+                .orElseThrow(() -> new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO));
     }
 
     public void excluir(Long id) {
@@ -51,6 +52,6 @@ public class ClienteService {
                     clienteRepository.delete(m);
                     return Void.TYPE;
                 })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, CLIENTE_NAO_ENCONTRADO));
+                .orElseThrow(() -> new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO));
     }
 }
