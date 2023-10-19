@@ -36,7 +36,7 @@ public class PedidoController {
     }
 
     @PatchMapping("{id}")
-    public void alterarStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDto) {
+    public void alterarStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDto atualizacaoStatusPedidoDto) {
 //        String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();
 //        pedidoService.alterarStatus(id, StatusPedido.valueOf(novoStatus));
     }
