@@ -16,7 +16,7 @@ import java.util.List;
 public class PedidoDto {
 
     @NotNull(message = "Informe o código do cliente.")
-    private Integer cliente;
+    private Long cliente;
 
     @NotNull(message = "campo total do pedido é obrigatório.")
     private BigDecimal total;

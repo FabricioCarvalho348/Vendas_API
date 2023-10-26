@@ -11,6 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ItemPedidoDto {
 
-    private Integer produto;
+    private Long produto;
     private Integer quantidade;
 }
