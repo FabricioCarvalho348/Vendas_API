@@ -25,18 +25,23 @@ public class Pedido {
     private Integer id;
 
     @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @Getter
+    @Setter
     @Column(name = "data_pedido")
     private LocalDate dataPedido;
 
     @Getter
+    @Setter
     @Column(name = "total", precision = 10, scale = 2)
     private BigDecimal total;
 
+    @Getter
+    @Setter
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
