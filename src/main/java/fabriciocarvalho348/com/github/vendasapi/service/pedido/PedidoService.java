@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface PedidoService {
     Pedido incluir(PedidoDto pedidoDto);
 
-    Optional<Pedido> pedidoCompleto(Integer id);
+    Optional<Pedido> pedidoCompleto(Long id);
 
-    void alterarStatus(Integer id, StatusPedido statusPedido);
+    void alterarStatus(Long id, StatusPedido statusPedido);
 }

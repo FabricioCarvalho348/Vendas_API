@@ -12,6 +12,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     // TODO: Estudar JPQL
     @Query("select p from Pedido p left join fetch p.itens where p.id= :id")
-    Optional<Pedido> findByIdFetchItens(@Param("id") Integer id);
+    Optional<Pedido> findByIdFetchItens(@Param("id") Long id);
 
 }

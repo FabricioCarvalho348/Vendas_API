@@ -7,6 +7,7 @@ import fabriciocarvalho348.com.github.vendasapi.dto.PedidoDto;
 import fabriciocarvalho348.com.github.vendasapi.exception.ResourceNotFoundException;
 import fabriciocarvalho348.com.github.vendasapi.model.entity.ItemPedido;
 import fabriciocarvalho348.com.github.vendasapi.model.entity.Pedido;
+import fabriciocarvalho348.com.github.vendasapi.model.enums.StatusPedido;
 import fabriciocarvalho348.com.github.vendasapi.service.pedido.PedidoService;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/pedidos")
 public class PedidoController {
 
-    // @Autowired - Comentado para demonstrar como injetar uma classe manualmente
+    // @Autowired - comentado para demonstrar como injetar um classe manualmente
     private PedidoService pedidoService;
 
     public PedidoController(PedidoService pedidoService) {
@@ -29,23 +30,25 @@ public class PedidoController {
     }
 
     @PostMapping
-    public Integer incluir(@RequestBody @Valid PedidoDto pedidoDTO) {
+    public Long incluir(@RequestBody @Valid PedidoDto pedidoDTO) {
         Pedido pedido = pedidoService.incluir(pedidoDTO);
         return pedido.getId();
     }
 
     @GetMapping("/{id}")
-    public InformacaoPedidoDto pedidoCompleto(@PathVariable Integer id) {
+    public InformacaoPedidoDto pedidoCompleto(@PathVariable Long id) {
         return pedidoService.pedidoCompleto(id)
                 .map(pedido -> builderInformacaoPedidoDTO(pedido))
-                        .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado."));
+                .orElseThrow(() -> new ResourceNotFoundException("Pedido não encontrado."));
     }
 
-    @PatchMapping("{id}")
-    public void alterarStatus(@PathVariable Integer id, @RequestBody AtualizacaoStatusPedidoDto atualizacaoStatusPedidoDto) {
-//        String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();
-//        pedidoService.alterarStatus(id, StatusPedido.valueOf(novoStatus));
+    @PatchMapping("/{id}")
+    public void alterarStatus(@PathVariable Long id,
+                              @RequestBody AtualizacaoStatusPedidoDto atualizacaoStatusPedidoDTO) {
+        String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();
+        pedidoService.alterarStatus(id, StatusPedido.valueOf(novoStatus));
     }
+
 
     private InformacaoPedidoDto builderInformacaoPedidoDTO(Pedido pedido) {
         return InformacaoPedidoDto.builder()
@@ -68,8 +71,8 @@ public class PedidoController {
                         .descricaoProduto(item.getProduto().getDescricao())
                         .precoUnitario(item.getProduto().getPreco())
                         .quantidade(item.getQuantidade())
-                        .build()
-                ).collect(Collectors.toList());
+                        .build())
+                .collect(Collectors.toList());
     }
 
 }

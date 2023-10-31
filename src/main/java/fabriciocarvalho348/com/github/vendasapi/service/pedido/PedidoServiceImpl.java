@@ -41,13 +41,17 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public Optional<Pedido> pedidoCompleto(Integer id) {
+    public Optional<Pedido> pedidoCompleto(Long id) {
         return pedidoRepository.findByIdFetchItens(id);
     }
 
     @Override
-    public void alterarStatus(Integer id, StatusPedido statusPedido) {
-
+    public void alterarStatus(Long id, StatusPedido statusPedido) {
+        pedidoRepository.findById(id)
+                .map(pedido -> {
+                    pedido.setStatus(statusPedido);
+                    return pedidoRepository.save(pedido);
+                }).orElseThrow(() -> new ResourceNotFoundException("Código de pedido inválido"));
     }
 
     private Cliente findCliente(PedidoDto pedidoDto) {
