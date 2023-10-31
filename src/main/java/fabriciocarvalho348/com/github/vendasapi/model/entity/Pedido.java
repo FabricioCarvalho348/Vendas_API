@@ -22,7 +22,7 @@ public class Pedido {
     @Setter
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Getter
     @Setter

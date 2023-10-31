@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Cliente listarPorId(@PathVariable Long id) {
+    public Cliente pesquisarPorId(@PathVariable Long id) {
         return clienteService.pesquisarPorId(id);
     }
 
@@ -29,13 +30,13 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente incluir(@RequestBody Cliente cliente) {
+    public Cliente incluir(@Valid @RequestBody Cliente cliente) {
         return clienteService.incluir(cliente);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Cliente atualizar(@RequestBody Cliente cliente, @PathVariable Long id) {
+    public Cliente atualizar(@Valid @RequestBody Cliente cliente, @PathVariable Long id) {
         return clienteService.atualizar(cliente, id);
     }
 

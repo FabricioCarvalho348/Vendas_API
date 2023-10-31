@@ -1,14 +1,18 @@
 package fabriciocarvalho348.com.github.vendasapi.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
+@Entity
 @Getter
 @Setter
-@Entity
-@Table(name = "ITEM_PEDIDO")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "ITENS_PEDIDO")
 public class ItemPedido {
 
     @Id
