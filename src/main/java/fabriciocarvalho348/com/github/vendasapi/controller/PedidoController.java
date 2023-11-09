@@ -4,11 +4,15 @@ import fabriciocarvalho348.com.github.vendasapi.dto.AtualizacaoStatusPedidoDto;
 import fabriciocarvalho348.com.github.vendasapi.dto.InformacaoItemPedidoDto;
 import fabriciocarvalho348.com.github.vendasapi.dto.InformacaoPedidoDto;
 import fabriciocarvalho348.com.github.vendasapi.dto.PedidoDto;
+import fabriciocarvalho348.com.github.vendasapi.exception.ApiErros;
 import fabriciocarvalho348.com.github.vendasapi.exception.ResourceNotFoundException;
 import fabriciocarvalho348.com.github.vendasapi.model.entity.ItemPedido;
 import fabriciocarvalho348.com.github.vendasapi.model.entity.Pedido;
 import fabriciocarvalho348.com.github.vendasapi.model.enums.StatusPedido;
 import fabriciocarvalho348.com.github.vendasapi.service.pedido.PedidoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,12 +34,21 @@ public class PedidoController {
     }
 
     @PostMapping
+    @ApiOperation(value = "Cria um pedido.")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "O pedido foi criado com sucesso."),
+            @ApiResponse(code = 400, message = "Contém erro(s) de validação.", response = ApiErros.class)
+    })
     public Long incluir(@RequestBody @Valid PedidoDto pedidoDTO) {
         Pedido pedido = pedidoService.incluir(pedidoDTO);
         return pedido.getId();
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "Apresenta informações do pedido.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Apresenta informações do pedido.")
+    })
     public InformacaoPedidoDto pedidoCompleto(@PathVariable Long id) {
         return pedidoService.pedidoCompleto(id)
                 .map(pedido -> builderInformacaoPedidoDTO(pedido))
@@ -43,6 +56,10 @@ public class PedidoController {
     }
 
     @PatchMapping("/{id}")
+    @ApiOperation(value = "Altera o status do pedido.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Status do pedido alterado.")
+    })
     public void alterarStatus(@PathVariable Long id,
                               @RequestBody AtualizacaoStatusPedidoDto atualizacaoStatusPedidoDTO) {
         String novoStatus = atualizacaoStatusPedidoDTO.getNovoStatus();
