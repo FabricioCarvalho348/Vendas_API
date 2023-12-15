@@ -4,9 +4,8 @@ import fabriciocarvalho348.com.github.vendasapi.exception.ResourceNotFoundExcept
 import fabriciocarvalho348.com.github.vendasapi.model.entity.Cliente;
 import fabriciocarvalho348.com.github.vendasapi.model.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class ClienteService {
 
     public Cliente pesquisarPorId(Long id) {
         return clienteRepository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO));
+                .orElseThrow(() -> new ResourceNotFoundException(CLIENTE_NAO_ENCONTRADO));
     }
 
     public List<Cliente> pesquisarTodos() {
@@ -31,11 +30,12 @@ public class ClienteService {
     }
 
     public Cliente atualizar(Cliente cliente, Long id) {
-//        Cliente encontrado = pesquisarPorId(id);
-//        cliente.setId(encontrado.getId());
-//        return clienteRepository.save(cliente);
+        // Utilizando forma tradicional de desenvolvimento
+        // Cliente encontrado = pesquisarPorId(id);
+        // cliente.setId(encontrado.getId());
+        // return clienteRepository.save(cliente);
 
-        // API STREAM JAVA
+        // Utilizando API Stream
         return clienteRepository.findById(id)
                 .map(m -> {
                     cliente.setId(m.getId());
@@ -45,8 +45,11 @@ public class ClienteService {
     }
 
     public void excluir(Long id) {
-//        Cliente encontrado = pesquisarPorId(id);
-//        clienteRepository.delete(encontrado);
+        // Utilizando forma tradicional de desenvolvimento
+        // Cliente encontrado = pesquisarPorId(id);
+        // clienteRepository.delete(encontrado);
+
+        // Utilizando API Stream
         clienteRepository.findById(id)
                 .map(m -> {
                     clienteRepository.delete(m);
