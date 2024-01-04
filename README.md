@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 # Sobre
-<p>Projeto de uma API REST utilizando Java e Spring Boot sob orientação de <a href="https://www.linkedin.com/in/ewerton-carreira-dev/">Ewerton Carreira</a>.</p>
+<p>Projeto de uma API REST utilizando Java e Spring Boot sob orientação de <a href="https://www.linkedin.com/in/ewerton-carreira-dev/">Ewerton Carreira</a>, é uma API de Vendas que tem a finalidade de aprendizado e nela foi criado todas as operações de um CRUD para Cliente, Pedido e Produto, temos autenticação e autorização utilizando JWT e Spring Security, está documentada com Swagger, uma divisão bem definida com Model, Service, Controller, DTOs, Exception, Config, Security.</p>
 
 # Tecnologias
 
