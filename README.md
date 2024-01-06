@@ -33,6 +33,6 @@ mvn spring-boot:run
 
 # Desenvolvedor
 
-<a href="https://www.linkedin.com/in/inacio-fabricio-carvalho/"><img src="https://media.licdn.com/dms/image/C4D03AQFoTixlHmtQjA/profile-displayphoto-shrink_800_800/0/1650395440554?e=1704326400&v=beta&t=MLW4OBEAkl2qgVfo6PaCUB78vkDibYXv1prHaS9IHWQ" alt="Foto do Fabricio Carvalho" width="115"/></a> |
+<a href="https://www.linkedin.com/in/inacio-fabricio-carvalho/"><img src="https://media.licdn.com/dms/image/D4D03AQE8bq-qVWrQtg/profile-displayphoto-shrink_800_800/0/1704545822952?e=1709769600&v=beta&t=qw7rnp3jfPKBzyxy6M4NBcRwII-7xTux7w7WtYOn53Y" alt="Foto do Fabricio Carvalho" width="115"/></a> |
 |:-:
 <a href="https://www.linkedin.com/in/inacio-fabricio-carvalho/">Fabricio Carvalho</a> |
