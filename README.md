@@ -18,12 +18,12 @@
 
 ### Faça o clone do repositório
 ```
-git clone
+git clone https://github.com/FabricioCarvalho348/Vendas_API.git
 ```
 
 ### Utilize o comando para empacotar o projeto
 ```
-mvn package https://github.com/FabricioCarvalho348/Vendas_API
+mvn package
 ```
 
 ### Execute este comando para inicializar o projeto
